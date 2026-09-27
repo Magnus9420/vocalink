@@ -1,0 +1,9 @@
+{
+  "expo": {
+    "name": "VocaLink",
+    "slug": "vocalink",
+    "version": "0.1.0",
+    "orientation": "portrait",
+    "newArchEnabled": false
+  }
+}

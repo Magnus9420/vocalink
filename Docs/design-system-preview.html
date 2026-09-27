@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>VocaLink — Design System Preview</title>
+<style>
+  :root{
+    --bg:#F8FAF7; --card:#FFFFFF; --ink:#101828; --muted:#667085;
+    --primary:#0E7C3E; --primary-dark:#0A5E30; --accent:#F59E0B;
+    --info:#175CD3; --danger:#D92D20; --border:#E4E7EC; --radius:12px;
+  }
+  *{box-sizing:border-box} body{margin:0;font-family:Inter,system-ui,-apple-system,Segoe UI,Roboto,Arial;background:var(--bg);color:var(--ink)}
+  .wrap{max-width:480px;margin:0 auto;padding:16px 16px 80px}
+  h1{font-size:24px;margin:8px 0} h2{font-size:20px;margin:28px 0 12px;border-top:1px solid var(--border);padding-top:20px}
+  p.small{color:var(--muted);font-size:14px}
+  .swatches{display:grid;grid-template-columns:1fr 1fr 1fr;gap:10px}
+  .sw{border-radius:12px;overflow:hidden;border:1px solid var(--border);background:#fff}
+  .sw div:first-child{height:56px} .sw div:last-child{padding:8px;font-size:12px}
+  .btn{display:block;width:100%;padding:14px;border-radius:12px;border:0;font-size:16px;font-weight:700;margin:8px 0;cursor:pointer}
+  .btn-primary{background:var(--primary);color:#fff} .btn-primary:active{background:var(--primary-dark)}
+  .btn-accent{background:var(--accent);color:#101828} .btn-outline{background:#fff;color:var(--primary);border:2px solid var(--primary)}
+  .btn-danger{background:#fff;color:var(--danger);border:2px solid var(--danger)}
+  .badges{display:flex;gap:8px;flex-wrap:wrap;margin:8px 0}
+  .badge{font-size:12px;font-weight:800;padding:4px 10px;border-radius:999px;letter-spacing:.2px}
+  .b-verified{background:var(--primary);color:#fff} .b-free{background:#fff;color:var(--primary);border:1.5px solid var(--primary)}
+  .b-sponsored{background:var(--info);color:#fff} .b-paid{background:#EAECF0;color:#344054} .b-warn{background:#FEF0C7;color:#B54708}
+  .chips{display:flex;gap:8px;flex-wrap:wrap} .chip{padding:8px 14px;border-radius:999px;background:#fff;border:1.5px solid var(--border);font-size:14px}
+  .chip.active{border-color:var(--primary);color:var(--primary);font-weight:700}
+  .card{background:var(--card);border:1px solid var(--border);border-radius:var(--radius);padding:14px;margin:12px 0;box-shadow:0 1px 2px rgba(16,24,40,.06)}
+  .card h3{margin:6px 0;font-size:17px} .meta{font-size:13px;color:var(--muted);margin:4px 0}
+  .row{display:flex;justify-content:space-between;align-items:center;gap:8px}
+  .stars{color:var(--accent);letter-spacing:2px} .progress{height:8px;background:#EAECF0;border-radius:99px;overflow:hidden;margin:8px 0}
+  .progress i{display:block;height:100%;width:65%;background:var(--primary)}
+  input,select{width:100%;padding:13px;border-radius:8px;border:1.5px solid var(--border);font-size:16px;margin:6px 0;background:#fff}
+  .nav{position:fixed;bottom:0;left:50%;transform:translateX(-50%);width:100%;max-width:480px;background:#fff;border-top:1px solid var(--border);display:flex;padding:10px 6px}
+  .nav div{flex:1;text-align:center;font-size:11px;color:var(--muted)} .nav div.active{color:var(--primary);font-weight:800}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <p class="small">VocaLink • From Skill to Opportunity • Mobile-first</p>
+  <h1>Design System Preview</h1>
+  <p class="small">Tokens from <b>Docs/IMPLEMENTATION_PLAN.md §1</b>. Open this file in your browser. Max width 480px = phone.</p>
+
+  <h2>1. Colors</h2>
+  <div class="swatches">
+    <div class="sw"><div style="background:#0E7C3E"></div><div><b>Primary</b><br>#0E7C3E trust</div></div>
+    <div class="sw"><div style="background:#F59E0B"></div><div><b>Accent</b><br>#F59E0B CTA</div></div>
+    <div class="sw"><div style="background:#175CD3"></div><div><b>Info</b><br>#175CD3 sponsored</div></div>
+    <div class="sw"><div style="background:#101828"></div><div><b>Ink</b><br>#101828</div></div>
+    <div class="sw"><div style="background:#F8FAF7"></div><div><b>Background</b><br>#F8FAF7</div></div>
+    <div class="sw"><div style="background:#D92D20"></div><div><b>Danger</b><br>#D92D20</div></div>
+  </div>
+
+  <h2>2. Typography</h2>
+  <div class="card"><div style="font-size:24px;font-weight:800">H1 24 — Find a skill, get certified</div>
+  <div style="font-size:20px;font-weight:700;margin-top:6px">H2 20 — Verified programmes near you</div>
+  <div style="font-size:16px;margin-top:6px">Body 16 — Compare cost, duration, certification and reviews before you enrol.</div>
+  <div style="font-size:14px;color:var(--muted)">Small 14 — Lagos • Offline • 3 months</div></div>
+
+  <h2>3. Buttons (44px+ touch)</h2>
+  <button class="btn btn-primary">Find Training</button>
+  <button class="btn btn-accent">Start Guided Discovery</button>
+  <button class="btn btn-outline">View Certification Pathway</button>
+  <button class="btn btn-danger">Report Listing</button>
+
+  <h2>4. Badges</h2>
+  <div class="badges">
+    <span class="badge b-verified">✓ Verified</span>
+    <span class="badge b-free">Free</span>
+    <span class="badge b-sponsored">Sponsored</span>
+    <span class="badge b-paid">Paid</span>
+    <span class="badge b-warn">Needs review</span>
+  </div>
+
+  <h2>5. Search + Filters</h2>
+  <input placeholder="Search trade, skill, provider… e.g. electrical" />
+  <div class="chips">
+    <span class="chip active">All</span><span class="chip">Free</span><span class="chip">Offline</span>
+    <span class="chip">Certified</span><span class="chip">Verified only</span><span class="chip">Lagos</span>
+  </div>
+
+  <h2>6. Programme Card</h2>
+  <div class="card">
+    <div class="badges"><span class="badge b-verified">✓ Verified</span><span class="badge b-free">Free</span></div>
+    <h3>Electrical Installation — Beginner</h3>
+    <div class="meta">BrightVolt Academy • Lagos • Offline • 3 months • Starts Oct 6</div>
+    <div class="row"><span class="stars">★★★★☆ 4.6 (112)</span><b>NSQ Pathway</b></div>
+    <div class="progress"><i></i></div>
+    <div class="meta">65% complete • Next: Wiring practical</div>
+  </div>
+
+  <h2>7. Job / Provider Cards</h2>
+  <div class="card">
+    <div class="badges"><span class="badge b-paid">Paid</span><span class="badge b-verified">✓ Verified employer</span></div>
+    <h3>Junior Electrician — Ikeja</h3>
+    <div class="meta">Dems Power • Full-time • Portfolio required</div>
+  </div>
+  <div class="card">
+    <div class="row"><b>BrightVolt Academy</b><span class="badge b-verified">✓ Verified</span></div>
+    <div class="meta">42 programmes • 1,240 graduates • 4.6 rating</div>
+  </div>
+
+  <h2>8. Forms (State/City)</h2>
+  <select><option>State — Lagos</option><option>Abuja FCT</option><option>Kano</option><option>Rivers</option></select>
+  <select><option>City — Ikeja</option><option>Lekki</option><option>Surulere</option></select>
+  <input placeholder="Budget — e.g. Free only" />
+
+  <h2>9. Certification Stepper</h2>
+  <div class="card"><b>Training ✓ → Assessment (next) → Certification</b>
+  <p class="small">Training completion does NOT equal certification. Assessment at approved centre.</p></div>
+
+  <p class="small" style="margin-top:24px">Next: tell me what to change (colors, cards, spacing) and I’ll update tokens + rebuild this preview.</p>
+</div>
+<div class="nav"><div class="active">🏠<br>Discover</div><div>📚<br>My Learning</div><div>🎓<br>Certify</div><div>💼<br>Jobs</div><div>👤<br>Profile</div></div>
+</body>
+</html>

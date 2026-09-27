@@ -1,0 +1,25 @@
+services:
+  db:
+    image: postgres:16-alpine
+    container_name: vocalink-db
+    restart: unless-stopped
+    environment:
+      POSTGRES_USER: vocalink
+      POSTGRES_PASSWORD: vocalink
+      POSTGRES_DB: vocalink
+    ports:
+      - "5432:5432"
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+      - ./backups:/backups
+
+  mailhog:
+    image: mailhog/mailhog:v1.0.1
+    container_name: vocalink-mail
+    restart: unless-stopped
+    ports:
+      - "1025:1025"
+      - "8025:8025"
+
+volumes:
+  pgdata:

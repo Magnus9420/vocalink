@@ -1,0 +1,22 @@
+{
+  "name": "vocalink",
+  "version": "0.1.0",
+  "private": true,
+  "packageManager": "pnpm@9.0.0",
+  "scripts": {
+    "dev": "turbo run dev --parallel",
+    "dev:web": "turbo run dev --filter=@vocalink/web",
+    "dev:admin": "turbo run dev --filter=@vocalink/admin",
+    "build": "turbo run build",
+    "lint": "turbo run lint",
+    "typecheck": "turbo run typecheck",
+    "db:generate": "turbo run db:generate --filter=@vocalink/db",
+    "db:migrate": "turbo run db:migrate --filter=@vocalink/db",
+    "db:seed": "turbo run db:seed --filter=@vocalink/db",
+    "db:studio": "turbo run db:studio --filter=@vocalink/db"
+  },
+  "devDependencies": {
+    "turbo": "^2.0.0",
+    "typescript": "^5.4.0"
+  }
+}

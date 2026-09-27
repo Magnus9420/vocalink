@@ -1,0 +1,30 @@
+# deps
+node_modules/
+.pnp
+.pnp.js
+
+# builds
+.next/
+out/
+dist/
+build/
+.expo/
+.web/
+
+# env
+.env
+.env.*
+!.env.example
+
+# local db / backups
+backups/
+pgdata/
+
+# OS / editor
+.DS_Store
+Thumbs.db
+.vscode/*
+!.vscode/extensions.json
+
+# drizzle
+drizzle/*.sql
