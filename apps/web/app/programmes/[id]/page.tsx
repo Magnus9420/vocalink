@@ -1,6 +1,8 @@
 import Link from "next/link";
 import { getProgramme } from "@/lib/programmes";
 import { listReviews, submitReview, submitReport } from "@/lib/trust";
+import { enrol } from "@/lib/learning";
+import { redirect } from "next/navigation";
 
 export const dynamic = "force-dynamic";
 
@@ -17,6 +19,12 @@ export default async function ProgrammeDetail({ params }: { params: { id: string
   async function reportAction(form: FormData) {
     "use server";
     await submitReport("programme", params.id, String(form.get("reason") ?? "misleading"));
+  }
+
+  async function enrolAction() {
+    "use server";
+    await enrol(params.id);
+    redirect("/learning");
   }
 
   const avg = reviews.length ? (reviews.reduce((s, r) => s + (r.rating ?? 0), 0) / reviews.length).toFixed(1) : "—";
@@ -42,6 +50,10 @@ export default async function ProgrammeDetail({ params }: { params: { id: string
         <p>🏫 About provider: {p.providerBio ?? "—"}</p>
       </div>
       <p style={{ color: "#667085", fontSize: 13 }}>Verification means VocaLink reviewed this provider — it is not automatic accreditation. Training completion ≠ certification; assessment comes first.</p>
+      <form action={enrolAction}>
+        <button type="submit" style={{ width: "100%", padding: 14, borderRadius: 12, border: 0, background: "#0E7C3E", color: "#fff", fontWeight: 800, fontSize: 16 }}>Enrol in this programme</button>
+      </form>
+      <p><Link href="/learning">Go to My Learning →</Link></p>
 
       <h2>Reviews ({reviews.length})</h2>
       {reviews.map((r) => (
