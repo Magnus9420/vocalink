@@ -16,9 +16,11 @@ build/
 .env.*
 !.env.example
 
-# local db / backups
+# local db / backups / free local uploads (dev only, never commit user files)
 backups/
 pgdata/
+uploads/*
+!uploads/.gitkeep
 
 # OS / editor
 .DS_Store
