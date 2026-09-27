@@ -1,21 +1,60 @@
-export default function Home() {
+import Link from "next/link";
+import { searchProgrammes } from "@/lib/programmes";
+
+export const dynamic = "force-dynamic";
+
+const TRADES = ["", "Fashion", "Catering", "Welding", "Plumbing", "Carpentry", "Electrical Installation", "Photography", "Videography", "Beauty", "Construction", "Automotive"];
+
+export default async function Home({ searchParams }: { searchParams: Record<string, string | undefined> }) {
+  const filters = {
+    q: searchParams.q || undefined,
+    trade: searchParams.trade || undefined,
+    state: searchParams.state || undefined,
+    costType: (searchParams.cost as never) || undefined,
+    format: (searchParams.format as never) || undefined,
+    verifiedOnly: searchParams.verified === "1",
+    certifiedOnly: searchParams.certified === "1"
+  };
+  const rows = await searchProgrammes(filters);
+
   return (
     <main>
       <p style={{ color: "#667085", fontSize: 14 }}>VocaLink • From Skill to Opportunity</p>
       <h1 style={{ fontSize: 24 }}>Find a skill, get certified, find work</h1>
-      <input placeholder="Search trade, skill, provider…" style={{ width: "100%", padding: 13, borderRadius: 8, border: "1.5px solid #E4E7EC" }} />
-      <div style={{ display: "flex", gap: 8, marginTop: 12, flexWrap: "wrap" }}>
-        {["All", "Free", "Offline", "Certified", "Verified only"].map((c) => (
-          <span key={c} style={{ padding: "8px 14px", borderRadius: 999, background: "#fff", border: "1.5px solid #E4E7EC", fontSize: 14 }}>{c}</span>
-        ))}
-      </div>
-      <div style={{ background: "#fff", border: "1px solid #E4E7EC", borderRadius: 12, padding: 14, marginTop: 12 }}>
-        <span style={{ background: "#0E7C3E", color: "#fff", fontSize: 12, fontWeight: 800, padding: "4px 10px", borderRadius: 999 }}>✓ Verified</span>{" "}
-        <span style={{ border: "1.5px solid #0E7C3E", color: "#0E7C3E", fontSize: 12, fontWeight: 800, padding: "4px 10px", borderRadius: 999 }}>Free</span>
-        <h3>Electrical Installation — Beginner</h3>
-        <p style={{ color: "#667085", fontSize: 13 }}>BrightVolt Academy • Lagos • Offline • 3 months</p>
-      </div>
-      <p style={{ color: "#667085", fontSize: 13 }}>Phase 0 skeleton. Auth at /api/auth. DB via local Postgres. Storage via Cloudflare R2.</p>
+      <form method="get" style={{ display: "grid", gap: 8 }}>
+        <input name="q" defaultValue={filters.q ?? ""} placeholder="Search trade, skill, provider…" style={{ width: "100%", padding: 13, borderRadius: 8, border: "1.5px solid #E4E7EC" }} />
+        <div style={{ display: "flex", gap: 8, flexWrap: "wrap" }}>
+          <select name="trade" defaultValue={filters.trade ?? ""} style={{ flex: 1, padding: 10, borderRadius: 8, border: "1.5px solid #E4E7EC" }}>
+            {TRADES.map((t) => (<option key={t} value={t}>{t === "" ? "All trades" : t}</option>))}
+          </select>
+          <select name="state" defaultValue={filters.state ?? ""} style={{ flex: 1, padding: 10, borderRadius: 8, border: "1.5px solid #E4E7EC" }}>
+            {["", "Lagos", "FCT"].map((s) => (<option key={s} value={s}>{s === "" ? "All locations" : s}</option>))}
+          </select>
+        </div>
+        <div style={{ display: "flex", gap: 8, flexWrap: "wrap" }}>
+          <select name="cost" defaultValue={searchParams.cost ?? ""} style={{ flex: 1, padding: 10, borderRadius: 8, border: "1.5px solid #E4E7EC" }}>
+            {["", "free", "sponsored", "paid"].map((c) => (<option key={c} value={c}>{c === "" ? "Any cost" : c}</option>))}
+          </select>
+          <select name="format" defaultValue={searchParams.format ?? ""} style={{ flex: 1, padding: 10, borderRadius: 8, border: "1.5px solid #E4E7EC" }}>
+            {["", "online", "offline", "hybrid"].map((c) => (<option key={c} value={c}>{c === "" ? "Any format" : c}</option>))}
+          </select>
+        </div>
+        <label style={{ fontSize: 14 }}><input type="checkbox" name="verified" value="1" defaultChecked={filters.verifiedOnly} /> Verified only</label>
+        <button type="submit" style={{ padding: 14, borderRadius: 12, border: 0, background: "#0E7C3E", color: "#fff", fontWeight: 800, fontSize: 16 }}>Search</button>
+      </form>
+      <p><Link href="/guided">Not sure what to learn? Try Guided Discovery →</Link></p>
+      <p style={{ color: "#667085" }}>{rows.length} programme(s) found. Verified first.</p>
+      {rows.map((r) => (
+        <div key={r.id} style={{ background: "#fff", border: "1px solid #E4E7EC", borderRadius: 12, padding: 14, marginTop: 12 }}>
+          <div>
+            {r.verificationStatus === "approved" && (<span style={{ background: "#0E7C3E", color: "#fff", fontSize: 12, fontWeight: 800, padding: "4px 10px", borderRadius: 999 }}>✓ Verified</span>)}
+            {" "}<span style={{ background: "#EAECF0", fontSize: 12, fontWeight: 800, padding: "4px 10px", borderRadius: 999 }}>{r.costType}</span>
+          </div>
+          <h3><Link href={`/programmes/${r.id}`}>{r.title}</Link></h3>
+          <p style={{ color: "#667085", fontSize: 13 }}>{r.providerName} • {r.state} {r.city ? `• ${r.city}` : ""} • {r.format} • {r.duration}</p>
+          {r.certificationInfo && <p style={{ fontSize: 13 }}>🎓 {r.certificationInfo}</p>}
+        </div>
+      ))}
     </main>
   );
 }
