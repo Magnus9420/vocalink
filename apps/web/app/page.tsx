@@ -19,6 +19,13 @@ export default async function Home({ searchParams }: { searchParams: Record<stri
 
   return (
     <main>
+      <nav style={{ display: "flex", gap: 12, alignItems: "center", padding: "8px 0", borderBottom: "1px solid #E4E7EC", marginBottom: 12, fontSize: 14 }}>
+        <b>VocaLink</b>
+        <Link href="/">Discover</Link>
+        <Link href="/guided">Guided</Link>
+        <Link href="/providers/apply">For Providers</Link>
+        <Link href="/programmes/new">Publish</Link>
+      </nav>
       <p style={{ color: "#667085", fontSize: 14 }}>VocaLink • From Skill to Opportunity</p>
       <h1 style={{ fontSize: 24 }}>Find a skill, get certified, find work</h1>
       <form method="get" style={{ display: "grid", gap: 8 }}>
@@ -55,6 +62,9 @@ export default async function Home({ searchParams }: { searchParams: Record<stri
           {r.certificationInfo && <p style={{ fontSize: 13 }}>🎓 {r.certificationInfo}</p>}
         </div>
       ))}
+      <footer style={{ marginTop: 24, paddingTop: 12, borderTop: "1px solid #E4E7EC", fontSize: 13, color: "#667085" }}>
+        VocaLink: From Skill to Opportunity • <Link href="/providers/apply">List your training</Link> • Admin: localhost:3001/verifications
+      </footer>
     </main>
   );
 }
