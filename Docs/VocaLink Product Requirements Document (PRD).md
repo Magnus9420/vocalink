@@ -928,3 +928,25 @@ VocaLink is successful when a Nigerian who wants to become economically producti
 
 **VocaLink: From Skill to Opportunity.**
 
+---
+
+# **Appendix A — Local Execution & Tooling Supplement (added during implementation, original §§1–37 unchanged)**
+
+## **A.1 Local execution confirmed (app + database)**
+Both app and database run locally on the owner's Windows PC — no cloud deploy required for Phases 0–2:
+- App: `pnpm dev` → web `http://localhost:3000`, admin `http://localhost:3001`, mobile via Expo Go (same WiFi). Verified with `next build` for web + admin.
+- Database: PostgreSQL 16 in Docker (`docker compose up -d db`, container `vocalink-db`, `localhost:5432`), schema via Drizzle (`db:generate → db:migrate → db:seed`, 19 tables). No Supabase Cloud subscription used.
+
+## **A.2 Accounts / files handling**
+- Accounts: GitHub `Magnus9420/vocalink` (owner-held); Better Auth user/session tables in local Postgres; Cloudflare account deferred (see below) — no user secrets are committed (`.env*` git-ignored, only `.env.example` tracked).
+- Files: portfolios/verification docs use free-first local `./uploads/` (git-ignored, served by `/api/uploads/[...key]`); Cloudflare R2 buckets (`vocalink-portfolios`, `vocalink-private`) are the documented upgrade path and activate automatically when `R2_*` env vars are set — zero code changes. Seed/demo data lives in `packages/db/src/seed.ts`; DB backups go to `./backups/` (git-ignored).
+- Design preview: `Docs/design-system-preview.html` (committed, opens by double-click, no server needed) — carries a visible “design improvements requested” note tracked against this PRD (§34 principles).
+
+## **A.3 Tool review rationale**
+Chosen for $0 first-project cost with clean upgrade paths (details in `Docs/IMPLEMENTATION_PLAN.md §2`):
+- Local Postgres 16 + Drizzle ORM (not Supabase Cloud): avoids subscription; same SQL migrates to managed Postgres later.
+- Better Auth (self-hosted): avoids auth-vendor lock-in/fees; Expo + Next.js share one session.
+- Cloudflare R2 deferred to local `./uploads/` fallback: avoids card/billing now; S3-compatible helpers make R2 a config-only switch.
+- No Vercel: local `pnpm dev` + Docker Compose; same images ship to a VPS later.
+- Expo + Next.js + Turborepo monorepo: one TypeScript codebase for mobile, web fallback, and admin.
+
