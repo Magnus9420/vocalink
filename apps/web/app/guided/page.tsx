@@ -41,7 +41,7 @@ export default async function Guided({ searchParams }: { searchParams: Record<st
             </div>
           ) : (
             <p style={{ color: "#667085", fontSize: 13 }}>
-              {status.flagOn ? "AI guidance off (no API key yet) — rules result above." : "AI guidance is OFF (admin flag). Rules result above."}
+              {status.flagOn ? (status.hasKey ? "AI didn’t respond (check key/quota in server logs) — rules result above." : "AI guidance off (no API key yet) — rules result above.") : "AI guidance is OFF (admin flag). Rules result above."}
             </p>
           )}
           {rec.rows.length === 0 && <p>No matches — try “Anywhere” or “Either”.</p>}
