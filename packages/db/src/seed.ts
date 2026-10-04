@@ -74,13 +74,49 @@ async function main() {
     })
     .onConflictDoNothing();
 
+  await db
+    .insert(providers)
+    .values({
+      id: "provider-kano-tech",
+      name: "Kano Technical Works",
+      type: "Technical college",
+      bio: "Welding, automotive and construction skills in Kano.",
+      state: "Kano",
+      city: "Kano",
+      verificationStatus: "approved",
+      contact: "hello@kanotech.example"
+    })
+    .onConflictDoNothing();
+
+  await db
+    .insert(providers)
+    .values({
+      id: "provider-rivers-beauty",
+      name: "Rivers Beauty Academy",
+      type: "Vocational centre",
+      bio: "Beauty and hairdressing in Port Harcourt.",
+      state: "Rivers",
+      city: "Port Harcourt",
+      verificationStatus: "pending",
+      contact: "hello@riversbeauty.example"
+    })
+    .onConflictDoNothing();
+
   const demos = [
     { id: "programme-elec-beginner", providerId: "provider-brightvolt", title: "Electrical Installation — Beginner", tradeCategory: "Electrical Installation", description: "Wiring, safety, fittings. 3 months offline in Ikeja with NSQ pathway.", state: "Lagos", city: "Ikeja", format: "offline" as const, duration: "3 months", costType: "free" as const, certificationInfo: "NSQ pathway available", spaces: 30, status: "published" },
     { id: "programme-elec-advanced", providerId: "provider-brightvolt", title: "Electrical Installation — Advanced", tradeCategory: "Electrical Installation", description: "Industrial wiring and troubleshooting. Paid weekend cohort.", state: "Lagos", city: "Ikeja", format: "offline" as const, duration: "2 months", costType: "paid" as const, certificationInfo: "NSQ pathway available", spaces: 20, status: "published" },
     { id: "programme-fashion-start", providerId: "provider-stitchlab", title: "Fashion Design Starter", tradeCategory: "Fashion", description: "Pattern drafting, sewing, finishing. Beginner friendly.", state: "FCT", city: "Abuja", format: "offline" as const, duration: "6 weeks", costType: "sponsored" as const, certificationInfo: "Completion certificate", spaces: 25, status: "published" },
     { id: "programme-photo-online", providerId: "provider-stitchlab", title: "Photography Basics (Online)", tradeCategory: "Photography", description: "Camera basics, lighting, editing. Fully online.", state: "Lagos", city: "Lekki", format: "online" as const, duration: "4 weeks", costType: "free" as const, certificationInfo: "Completion certificate", spaces: 100, status: "published" },
     { id: "programme-plumbing", providerId: "provider-brightvolt", title: "Plumbing Essentials", tradeCategory: "Plumbing", description: "Pipework, fittings, repairs. Practical weekends.", state: "Lagos", city: "Surulere", format: "hybrid" as const, duration: "8 weeks", costType: "paid" as const, certificationInfo: "NSQ pathway (planned)", spaces: 15, status: "published" },
-    { id: "programme-catering", providerId: "provider-stitchlab", title: "Catering & Small Chops", tradeCategory: "Catering", description: "Nigerian catering, costing, hygiene. Sponsored seats.", state: "FCT", city: "Abuja", format: "offline" as const, duration: "5 weeks", costType: "sponsored" as const, certificationInfo: "Completion certificate", spaces: 40, status: "published" }
+    { id: "programme-catering", providerId: "provider-stitchlab", title: "Catering & Small Chops", tradeCategory: "Catering", description: "Nigerian catering, costing, hygiene. Sponsored seats.", state: "FCT", city: "Abuja", format: "offline" as const, duration: "5 weeks", costType: "sponsored" as const, certificationInfo: "Completion certificate", spaces: 40, status: "published" },
+    { id: "programme-welding-kano", providerId: "provider-kano-tech", title: "Welding & Fabrication Basics", tradeCategory: "Welding", description: "Arc welding, safety, joints. Hands-on workshop.", state: "Kano", city: "Kano", format: "offline" as const, duration: "8 weeks", costType: "free" as const, certificationInfo: "NSQ pathway (planned)", spaces: 20, status: "published" },
+    { id: "programme-auto-kano", providerId: "provider-kano-tech", title: "Auto Mechanics Foundation", tradeCategory: "Automotive", description: "Engine basics, diagnostics, servicing.", state: "Kano", city: "Kano", format: "offline" as const, duration: "3 months", costType: "sponsored" as const, certificationInfo: "Completion certificate", spaces: 25, status: "published" },
+    { id: "programme-construct-kano", providerId: "provider-kano-tech", title: "Construction Skills Intro", tradeCategory: "Construction", description: "Blocklaying, plastering, site safety.", state: "Kano", city: "Kano", format: "offline" as const, duration: "6 weeks", costType: "free" as const, certificationInfo: "", spaces: 30, status: "published" },
+    { id: "programme-beauty-rivers", providerId: "provider-rivers-beauty", title: "Beauty & Hairdressing Starter", tradeCategory: "Beauty", description: "Braiding, styling, salon hygiene.", state: "Rivers", city: "Port Harcourt", format: "offline" as const, duration: "6 weeks", costType: "paid" as const, certificationInfo: "Completion certificate", spaces: 20, status: "published" },
+    { id: "programme-carpentry-lagos", providerId: "provider-brightvolt", title: "Carpentry Foundations", tradeCategory: "Carpentry", description: "Woodwork, joints, furniture basics.", state: "Lagos", city: "Ikeja", format: "offline" as const, duration: "8 weeks", costType: "free" as const, certificationInfo: "", spaces: 18, status: "published" },
+    { id: "programme-video-online", providerId: "provider-stitchlab", title: "Videography & Editing (Online)", tradeCategory: "Videography", description: "Shooting, editing, storytelling. Fully online.", state: "FCT", city: "Abuja", format: "online" as const, duration: "5 weeks", costType: "sponsored" as const, certificationInfo: "Completion certificate", spaces: 80, status: "published" },
+    { id: "programme-photo-rivers", providerId: "provider-rivers-beauty", title: "Event Photography Practical", tradeCategory: "Photography", description: "Events, portraits, client delivery.", state: "Rivers", city: "Port Harcourt", format: "hybrid" as const, duration: "4 weeks", costType: "paid" as const, certificationInfo: "", spaces: 15, status: "published" },
+    { id: "programme-electrical-kano", providerId: "provider-kano-tech", title: "Solar & Electrical Basics", tradeCategory: "Electrical Installation", description: "Solar installation plus home wiring.", state: "Kano", city: "Kano", format: "hybrid" as const, duration: "6 weeks", costType: "sponsored" as const, certificationInfo: "NSQ pathway (planned)", spaces: 35, status: "published" }
   ];
 
   for (const p of demos) {
