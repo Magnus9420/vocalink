@@ -29,6 +29,13 @@
       "when": 1791140939107,
       "tag": "0003_simple_hannibal_king",
       "breakpoints": true
+    },
+    {
+      "idx": 4,
+      "version": "7",
+      "when": 1791148918796,
+      "tag": "0004_nebulous_doctor_strange",
+      "breakpoints": true
     }
   ]
 }

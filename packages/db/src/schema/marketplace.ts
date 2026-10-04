@@ -30,3 +30,11 @@ export const messages = pgTable("messages", {
   body: text("body").notNull(),
   createdAt: timestamp("created_at").notNull().defaultNow()
 });
+
+// Phase 9: cache for AI guidance responses (same answers = zero repeat API calls)
+export const aiCache = pgTable("ai_cache", {
+  key: text("key").primaryKey(),
+  input: jsonb("input"),
+  output: jsonb("output"),
+  createdAt: timestamp("created_at").notNull().defaultNow()
+});

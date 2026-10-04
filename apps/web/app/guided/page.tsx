@@ -1,4 +1,5 @@
 import { GUIDED_QUESTIONS, guidedRecommend } from "@/lib/guided";
+import { aiEnhance, aiStatus } from "@/lib/ai";
 
 export const dynamic = "force-dynamic";
 
@@ -11,6 +12,8 @@ export default async function Guided({ searchParams }: { searchParams: Record<st
   };
   const answered = Boolean(answers.interest && answers.method && answers.budget && answers.state);
   const rec = answered ? await guidedRecommend(answers) : null;
+  const ai = rec ? await aiEnhance(answers, rec.trade) : null;
+  const status = await aiStatus();
 
   return (
     <main>
@@ -31,6 +34,16 @@ export default async function Guided({ searchParams }: { searchParams: Record<st
       {rec && (
         <div style={{ marginTop: 16 }}>
           <h2>Suggested: {rec.trade}</h2>
+          {ai ? (
+            <div style={{ background: "#FFFAEB", border: "1px solid #F59E0B", borderRadius: 12, padding: 14 }}>
+              <b>✨ AI guidance{ai.cached ? " (cached)" : ""}</b>
+              <p style={{ whiteSpace: "pre-line" }}>{ai.text}</p>
+            </div>
+          ) : (
+            <p style={{ color: "#667085", fontSize: 13 }}>
+              {status.flagOn ? "AI guidance off (no API key yet) — rules result above." : "AI guidance is OFF (admin flag). Rules result above."}
+            </p>
+          )}
           {rec.rows.length === 0 && <p>No matches — try “Anywhere” or “Either”.</p>}
           {rec.rows.map((r) => (
             <div key={r.id} style={{ background: "#fff", border: "1px solid #E4E7EC", borderRadius: 12, padding: 14, marginTop: 10 }}>

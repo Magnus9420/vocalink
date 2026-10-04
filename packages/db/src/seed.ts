@@ -19,7 +19,7 @@ async function main() {
   }
   console.log("Seeded trades:", TRADES.length);
 
-  const flags = ["guided_discovery", "reviews", "jobs", "internships", "provider_reg", "employer_reg"];
+  const flags = ["guided_discovery", "reviews", "jobs", "internships", "provider_reg", "employer_reg", "ai_recommendations"];
   for (const key of flags) {
     await db.insert(featureFlags).values({ key, enabled: true }).onConflictDoNothing();
   }
