@@ -3,7 +3,7 @@ import { searchProgrammes } from "./programmes";
 export const GUIDED_QUESTIONS = [
   { key: "interest", label: "What interests you most?", options: ["Working with hands", "Design & creativity", "Food & hospitality", "Tech & media"] },
   { key: "method", label: "How do you want to learn?", options: ["Physical", "Online", "Either"] },
-  { key: "budget", label: "Budget?", options: ["Free only", "Sponsored ok", "Can pay"] },
+  { key: "budget", label: "Budget?", options: ["Free only", "Sponsored", "Can pay"] },
   { key: "state", label: "Where?", options: ["Lagos", "FCT", "Anywhere"] }
 ] as const;
 
