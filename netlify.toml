@@ -1,0 +1,12 @@
+# Netlify deploy config — learner web app (apps/web).
+# NOTE: Netlify hosts the app only. The database must be hosted Postgres
+# (local Docker is unreachable from Netlify). See Docs/DEPLOY_NETLIFY.md.
+[build]
+  command = "pnpm --filter @vocalink/web build"
+  publish = "apps/web/.next"
+
+[[plugins]]
+  package = "@netlify/plugin-nextjs"
+
+[build.environment]
+  NODE_VERSION = "20"
