@@ -1,5 +1,5 @@
 import { db } from "./client";
-import { featureFlags, certificationPathways, providers, programmes } from "./schema/core";
+import { featureFlags, certificationPathways, providers, programmes, opportunities } from "./schema/core";
 import { trades } from "./schema/discover";
 import { randomUUID } from "crypto";
 
@@ -86,6 +86,18 @@ async function main() {
     await db.insert(programmes).values(p).onConflictDoNothing();
   }
   console.log("Seeded demo providers + programmes:", demos.length);
+
+  const opps = [
+    { id: "opp-elec-intern", orgUserId: "anonymous-org", type: "internship", role: "Electrical Intern — Ikeja", trade: "Electrical Installation", state: "Lagos", city: "Ikeja", paidStatus: "stipend", requirements: "Completed beginner training. 3 months, site visits.", status: "open" },
+    { id: "opp-fashion-job", orgUserId: "anonymous-org", type: "job", role: "Junior Fashion Designer", trade: "Fashion", state: "FCT", city: "Abuja", paidStatus: "paid", requirements: "Portfolio of 3 pieces. Full-time.", status: "open" },
+    { id: "opp-photo-mentor", orgUserId: "anonymous-org", type: "mentorship", role: "Photography Mentorship", trade: "Photography", state: "Lagos", city: "Lekki", paidStatus: "unpaid", requirements: "Beginners with camera. 6 weeks.", status: "open" },
+    { id: "opp-plumbing-job", orgUserId: "anonymous-org", type: "job", role: "Plumber — Maintenance", trade: "Plumbing", state: "Lagos", city: "Surulere", paidStatus: "paid", requirements: "Practical experience. References.", status: "open" },
+    { id: "opp-catering-appren", orgUserId: "anonymous-org", type: "apprenticeship", role: "Catering Apprentice", trade: "Catering", state: "FCT", city: "Abuja", paidStatus: "stipend", requirements: "5 weeks training complete. Weekend events.", status: "open" }
+  ];
+  for (const o of opps) {
+    await db.insert(opportunities).values(o).onConflictDoNothing();
+  }
+  console.log("Seeded demo opportunities:", opps.length);
   console.log("Seed done. Next: pnpm dev (web :3000)");
   process.exit(0);
 }
