@@ -36,6 +36,15 @@ async function main() {
     })
     .onConflictDoNothing();
 
+  const extraPathways = [
+    { id: "cert-fashion", trade: "Fashion", body: "Garment making association (placeholder)", steps: ["Complete training", "Submit portfolio", "Pass assessment", "Get certified"], assessmentLocation: "Abuja centre (placeholder)", requirements: "Training completion + portfolio", isNsqRelated: false },
+    { id: "cert-plumbing", trade: "Plumbing", body: "NSQ-related body (placeholder)", steps: ["Complete training", "Book assessment", "Pass assessment", "Get certified"], assessmentLocation: "Lagos centre (placeholder)", requirements: "Training completion + ID", isNsqRelated: true },
+    { id: "cert-photo", trade: "Photography", body: "Creative industry body (placeholder)", steps: ["Complete training", "Submit portfolio", "Get certified"], assessmentLocation: "Online review (placeholder)", requirements: "Portfolio of 10 works", isNsqRelated: false }
+  ];
+  for (const p of extraPathways) {
+    await db.insert(certificationPathways).values(p).onConflictDoNothing();
+  }
+
   await db
     .insert(providers)
     .values({

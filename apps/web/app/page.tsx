@@ -26,6 +26,8 @@ export default async function Home({ searchParams }: { searchParams: Record<stri
         <Link href="/providers/apply">For Providers</Link>
         <Link href="/programmes/new">Publish</Link>
         <Link href="/learning">My Learning</Link>
+        <Link href="/certifications">Certify</Link>
+        <Link href="/passport">Passport</Link>
       </nav>
       <p style={{ color: "#667085", fontSize: 14 }}>VocaLink • From Skill to Opportunity</p>
       <h1 style={{ fontSize: 24 }}>Find a skill, get certified, find work</h1>
