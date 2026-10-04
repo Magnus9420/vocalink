@@ -1,5 +1,6 @@
 import Link from "next/link";
 import { searchProgrammes } from "@/lib/programmes";
+import { isEnabled } from "@/lib/flags";
 
 export const dynamic = "force-dynamic";
 
@@ -16,19 +17,20 @@ export default async function Home({ searchParams }: { searchParams: Record<stri
     certifiedOnly: searchParams.certified === "1"
   };
   const rows = await searchProgrammes(filters);
+  const [guidedOn, jobsOn] = await Promise.all([isEnabled("guided_discovery"), isEnabled("jobs")]);
 
   return (
     <main>
       <nav style={{ display: "flex", gap: 12, alignItems: "center", padding: "8px 0", borderBottom: "1px solid #E4E7EC", marginBottom: 12, fontSize: 14 }}>
         <b>VocaLink</b>
         <Link href="/">Discover</Link>
-        <Link href="/guided">Guided</Link>
+        {guidedOn && <Link href="/guided">Guided</Link>}
         <Link href="/providers/apply">For Providers</Link>
         <Link href="/programmes/new">Publish</Link>
         <Link href="/learning">My Learning</Link>
         <Link href="/certifications">Certify</Link>
         <Link href="/passport">Passport</Link>
-        <Link href="/work">Work</Link>
+        {jobsOn && <Link href="/work">Work</Link>}
         <Link href="/search">Search all</Link>
         <Link href="/notifications">Notifications</Link>
         <Link href="/messages">Messages</Link>
@@ -56,7 +58,7 @@ export default async function Home({ searchParams }: { searchParams: Record<stri
         <label style={{ fontSize: 14 }}><input type="checkbox" name="verified" value="1" defaultChecked={filters.verifiedOnly} /> Verified only</label>
         <button type="submit" style={{ padding: 14, borderRadius: 12, border: 0, background: "#0E7C3E", color: "#fff", fontWeight: 800, fontSize: 16 }}>Search</button>
       </form>
-      <p><Link href="/guided">Not sure what to learn? Try Guided Discovery →</Link></p>
+      {guidedOn && <p><Link href="/guided">Not sure what to learn? Try Guided Discovery →</Link></p>}
       <p style={{ color: "#667085" }}>{rows.length} programme(s) found. Verified first.</p>
       {rows.map((r) => (
         <div key={r.id} style={{ background: "#fff", border: "1px solid #E4E7EC", borderRadius: 12, padding: 14, marginTop: 12 }}>

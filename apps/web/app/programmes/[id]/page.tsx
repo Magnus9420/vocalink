@@ -1,6 +1,7 @@
 import Link from "next/link";
 import { getProgramme } from "@/lib/programmes";
 import { listReviews, submitReview, submitReport } from "@/lib/trust";
+import { isEnabled } from "@/lib/flags";
 import { enrol } from "@/lib/learning";
 import { redirect } from "next/navigation";
 
@@ -10,6 +11,7 @@ export default async function ProgrammeDetail({ params }: { params: { id: string
   const p = await getProgramme(params.id);
   if (!p) return (<main><p>Programme not found.</p><p><Link href="/">← Back to Discover</Link></p></main>);
   const reviews = await listReviews(params.id);
+  const reviewsOn = await isEnabled("reviews");
 
   async function reviewAction(form: FormData) {
     "use server";
@@ -62,6 +64,7 @@ export default async function ProgrammeDetail({ params }: { params: { id: string
           <p>{r.body}</p>
         </div>
       ))}
+      {reviewsOn && (
       <form action={reviewAction} style={{ display: "grid", gap: 8, marginTop: 12 }}>
         <h3>Leave a review</h3>
         <select name="rating" style={{ padding: 10, borderRadius: 8, border: "1.5px solid #E4E7EC" }}>
@@ -70,6 +73,7 @@ export default async function ProgrammeDetail({ params }: { params: { id: string
         <textarea name="body" required placeholder="Did it deliver what was advertised?" rows={2} style={{ padding: 10, borderRadius: 8, border: "1.5px solid #E4E7EC" }} />
         <button type="submit" style={{ padding: 12, borderRadius: 10, border: 0, background: "#0E7C3E", color: "#fff", fontWeight: 800 }}>Submit review</button>
       </form>
+      )}
 
       <form action={reportAction} style={{ display: "flex", gap: 8, marginTop: 16 }}>
         <select name="reason" style={{ flex: 1, padding: 10, borderRadius: 8, border: "1.5px solid #E4E7EC" }}>
