@@ -1,5 +1,6 @@
 import { db } from "@vocalink/db/src/client";
 import { enrolments, programmes, providers } from "@vocalink/db/src/schema/core";
+import { notifications } from "@vocalink/db/src/schema/marketplace";
 import { eq, and, desc } from "drizzle-orm";
 import { randomUUID } from "crypto";
 
@@ -12,6 +13,7 @@ export async function enrol(programmeId: string) {
   if (existing[0]) return existing[0].id;
   const id = randomUUID();
   await db.insert(enrolments).values({ id, learnerUserId: DEMO_LEARNER, programmeId, status: "enrolled", progress: 0 });
+  await db.insert(notifications).values({ id: randomUUID(), userId: DEMO_LEARNER, type: "training", title: "Enrolment confirmed", body: programmeId });
   return id;
 }
 

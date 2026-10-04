@@ -22,6 +22,13 @@
       "when": 1790493988171,
       "tag": "0002_tiresome_leech",
       "breakpoints": true
+    },
+    {
+      "idx": 3,
+      "version": "7",
+      "when": 1791140939107,
+      "tag": "0003_simple_hannibal_king",
+      "breakpoints": true
     }
   ]
 }

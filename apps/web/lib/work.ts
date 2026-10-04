@@ -1,5 +1,6 @@
 import { db } from "@vocalink/db/src/client";
 import { opportunities, applications, learnerProfiles, learnerCertifications, certificationPathways, portfolios } from "@vocalink/db/src/schema/core";
+import { notifications } from "@vocalink/db/src/schema/marketplace";
 import { eq, and, ilike, or, desc } from "drizzle-orm";
 import { randomUUID } from "crypto";
 import { DEMO_LEARNER } from "./learning";
@@ -38,6 +39,7 @@ export async function apply(opportunityId: string) {
   if (existing[0]) return existing[0].id;
   const id = randomUUID();
   await db.insert(applications).values({ id, learnerUserId: DEMO_LEARNER, opportunityId, status: "applied" });
+  await db.insert(notifications).values({ id: randomUUID(), userId: DEMO_LEARNER, type: "work", title: "Application sent", body: opportunityId });
   return id;
 }
 

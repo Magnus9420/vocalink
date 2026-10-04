@@ -70,6 +70,10 @@ export const programmes = pgTable("programmes", {
   curriculum: jsonb("curriculum").$type<string[]>().default([]),
   spaces: integer("spaces"),
   status: text("status").notNull().default("draft"),
+  sponsor: text("sponsor"),
+  eligibility: text("eligibility"),
+  applicationDeadline: timestamp("application_deadline"),
+  beneficiaryTarget: text("beneficiary_target"),
   createdAt: timestamp("created_at").notNull().defaultNow()
 });
 

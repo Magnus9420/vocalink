@@ -29,6 +29,9 @@ export default async function Home({ searchParams }: { searchParams: Record<stri
         <Link href="/certifications">Certify</Link>
         <Link href="/passport">Passport</Link>
         <Link href="/work">Work</Link>
+        <Link href="/search">Search all</Link>
+        <Link href="/notifications">Notifications</Link>
+        <Link href="/messages">Messages</Link>
       </nav>
       <p style={{ color: "#667085", fontSize: 14 }}>VocaLink • From Skill to Opportunity</p>
       <h1 style={{ fontSize: 24 }}>Find a skill, get certified, find work</h1>
@@ -39,7 +42,7 @@ export default async function Home({ searchParams }: { searchParams: Record<stri
             {TRADES.map((t) => (<option key={t} value={t}>{t === "" ? "All trades" : t}</option>))}
           </select>
           <select name="state" defaultValue={filters.state ?? ""} style={{ flex: 1, padding: 10, borderRadius: 8, border: "1.5px solid #E4E7EC" }}>
-            {["", "Lagos", "FCT"].map((s) => (<option key={s} value={s}>{s === "" ? "All locations" : s}</option>))}
+            {["", "Lagos", "FCT", "Kano", "Rivers"].map((s) => (<option key={s} value={s}>{s === "" ? "All locations (national)" : s}</option>))}
           </select>
         </div>
         <div style={{ display: "flex", gap: 8, flexWrap: "wrap" }}>
