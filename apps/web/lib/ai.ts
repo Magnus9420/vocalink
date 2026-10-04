@@ -35,7 +35,7 @@ export async function aiEnhance(answers: Record<string, string>, rulesTrade: str
     `Rules engine suggested: ${rulesTrade}. Valid trades only: ${TRADES.join(", ")}. ` +
     `Reply in 3 short bullets: (1) why the suggested trade fits, (2) one alternative trade from the list, (3) first practical step this week. Under 90 words. Plain text, no markdown.`;
   try {
-    const model = process.env.GEMINI_MODEL ?? "gemini-2.0-flash";
+    const model = process.env.GEMINI_MODEL ?? "gemini-2.5-flash";
     const res = await fetch(
       `https://generativelanguage.googleapis.com/v1beta/models/${model}:generateContent?key=${process.env.GEMINI_API_KEY}`,
       {
@@ -47,7 +47,11 @@ export async function aiEnhance(answers: Record<string, string>, rulesTrade: str
         })
       }
     );
-    if (!res.ok) return null;
+    if (!res.ok) {
+      const errBody = (await res.text()).slice(0, 300);
+      console.error(`[ai] Gemini ${res.status} model=${model}: ${errBody}`);
+      return null;
+    }
     const data = (await res.json()) as { candidates?: { content?: { parts?: { text?: string }[] } }[] };
     const text = data.candidates?.[0]?.content?.parts?.map((p) => p.text ?? "").join("").trim() ?? "";
     if (!text) return null;
