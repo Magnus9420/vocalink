@@ -11,7 +11,7 @@ pnpm.cmd --filter @vocalink/db db:migrate
 pnpm.cmd --filter @vocalink/db db:seed
 ```
 
-Expected seed: trades 11, programmes 15, opportunities 5, pathways 4.
+Expected seed: trades 11, programmes 14, opportunities 5, pathways 4.
 
 ## Web — `pnpm.cmd --filter @vocalink/web dev` → http://localhost:3000
 - [ ] Home loads, nav shows Discover/Guided/Providers/Publish/Learning/Certify/Passport/Work/Search/Notifications/Messages
