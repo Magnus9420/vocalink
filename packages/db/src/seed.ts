@@ -1,5 +1,6 @@
 import { db } from "./client";
 import { featureFlags, certificationPathways, providers, programmes, opportunities } from "./schema/core";
+import { user } from "./schema/auth";
 import { trades } from "./schema/discover";
 import { randomUUID } from "crypto";
 
@@ -86,6 +87,14 @@ async function main() {
     await db.insert(programmes).values(p).onConflictDoNothing();
   }
   console.log("Seeded demo providers + programmes:", demos.length);
+
+  // Demo actors (FK targets for enrolments/applications/reviews/reports/opportunities)
+  for (const u of [
+    { id: "anonymous-learner", name: "Demo Learner", email: "learner@local.demo", role: "learner" },
+    { id: "anonymous-org", name: "Demo Employer", email: "employer@local.demo", role: "employer" }
+  ]) {
+    await db.insert(user).values({ ...u, emailVerified: false }).onConflictDoNothing();
+  }
 
   const opps = [
     { id: "opp-elec-intern", orgUserId: "anonymous-org", type: "internship", role: "Electrical Intern — Ikeja", trade: "Electrical Installation", state: "Lagos", city: "Ikeja", paidStatus: "stipend", requirements: "Completed beginner training. 3 months, site visits.", status: "open" },
