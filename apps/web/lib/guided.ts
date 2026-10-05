@@ -26,5 +26,8 @@ export async function guidedRecommend(answers: Record<string, string>) {
     if (rows.length > 0) return { trade, rows: rows.slice(0, 6) };
   }
   const fallback = await searchProgrammes({ format: format as never, costType: costType as never, state });
-  return { trade: "General", rows: fallback.slice(0, 6) };
+  if (fallback.length > 0) return { trade: "General", rows: fallback.slice(0, 6) };
+  // Last resort: anything published, so AI suggestions always pair with clickable options.
+  const any = await searchProgrammes({});
+  return { trade: "General", rows: any.slice(0, 6) };
 }
