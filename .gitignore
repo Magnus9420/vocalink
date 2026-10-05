@@ -22,6 +22,9 @@ pgdata/
 uploads/*
 !uploads/.gitkeep
 
+# local debug logs (never commit)
+logs/
+
 # OS / editor
 .DS_Store
 Thumbs.db

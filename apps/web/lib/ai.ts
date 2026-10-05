@@ -1,10 +1,21 @@
 import { createHash } from "crypto";
+import { appendFile, mkdir } from "node:fs/promises";
+import { join, dirname } from "node:path";
 import { db } from "@vocalink/db/src/client";
 import { aiCache } from "@vocalink/db/src/schema/marketplace";
 import { featureFlags } from "@vocalink/db/src/schema/core";
 import { eq } from "drizzle-orm";
 
 const TRADES = ["Fashion", "Catering", "Welding", "Plumbing", "Carpentry", "Electrical Installation", "Photography", "Videography", "Beauty", "Construction", "Automotive"];
+
+// Debug log a beginner can open in Notepad (no secrets: never logs the key).
+async function debugLog(line: string) {
+  try {
+    const file = join(process.cwd(), "..", "..", "logs", "ai-debug.log");
+    await mkdir(dirname(file), { recursive: true });
+    await appendFile(file, `${new Date().toISOString()} ${line}\n`);
+  } catch { /* never break the page */ }
+}
 
 export async function aiStatus(): Promise<{ flagOn: boolean; hasKey: boolean }> {
   let flagOn = false;
@@ -50,6 +61,7 @@ export async function aiEnhance(answers: Record<string, string>, rulesTrade: str
     if (!res.ok) {
       const errBody = (await res.text()).slice(0, 300);
       console.error(`[ai] Gemini ${res.status} model=${model}: ${errBody}`);
+      await debugLog(`HTTP ${res.status} model=${model} body=${errBody}`);
       return null;
     }
     const data = (await res.json()) as { candidates?: { content?: { parts?: { text?: string }[] } }[] };
@@ -59,7 +71,9 @@ export async function aiEnhance(answers: Record<string, string>, rulesTrade: str
       await db.insert(aiCache).values({ key, input: { answers, rulesTrade }, output: { text } }).onConflictDoNothing();
     } catch { /* cache is best-effort */ }
     return { text, cached: false };
-  } catch {
+  } catch (e) {
+    console.error(`[ai] exception: ${String(e).slice(0, 200)}`);
+    await debugLog(`EXCEPTION ${String(e).slice(0, 200)}`);
     return null;
   }
 }
