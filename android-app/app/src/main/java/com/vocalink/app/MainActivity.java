@@ -54,6 +54,9 @@ public class MainActivity extends Activity {
         settings.setLoadWithOverviewMode(true);
         settings.setUseWideViewPort(true);
         settings.setAllowFileAccess(false);
+        // HTTP cache stays enabled: on failure we retry the page from cache
+        // (offline reading of previously visited pages; actions still need network).
+        settings.setCacheMode(WebSettings.LOAD_DEFAULT);
 
         offlineView = new LinearLayout(this);
         offlineView.setOrientation(LinearLayout.VERTICAL);
@@ -67,6 +70,7 @@ public class MainActivity extends Activity {
         retry.setOnClickListener(v -> {
             offlineView.setVisibility(View.GONE);
             webView.setVisibility(View.VISIBLE);
+            webView.getSettings().setCacheMode(WebSettings.LOAD_DEFAULT);
             webView.loadUrl(HOME_URL);
         });
         offlineView.addView(msg);
@@ -86,10 +90,22 @@ public class MainActivity extends Activity {
 
         webView.setWebViewClient(new WebViewClient() {
             @Override
+            public void onPageFinished(WebView view, String url) {
+                super.onPageFinished(view, url);
+                view.getSettings().setCacheMode(WebSettings.LOAD_DEFAULT);
+            }
+
+            @Override
             public void onReceivedError(WebView view, WebResourceRequest request, WebResourceError error) {
                 if (request.isForMainFrame()) {
-                    view.setVisibility(View.GONE);
-                    offlineView.setVisibility(View.VISIBLE);
+                    if (view.getSettings().getCacheMode() != WebSettings.LOAD_CACHE_ELSE_NETWORK) {
+                        // First failure: retry from cache (offline reading).
+                        view.getSettings().setCacheMode(WebSettings.LOAD_CACHE_ELSE_NETWORK);
+                        view.reload();
+                    } else {
+                        view.setVisibility(View.GONE);
+                        offlineView.setVisibility(View.VISIBLE);
+                    }
                 }
             }
 
