@@ -1,0 +1,36 @@
+plugins {
+    id("com.android.application")
+}
+
+android {
+    namespace = "com.vocalink.app"
+    compileSdk = 34
+
+    defaultConfig {
+        applicationId = "com.vocalink.app"
+        minSdk = 24
+        targetSdk = 34
+        versionCode = 1
+        versionName = "1.0.0"
+    }
+
+    buildTypes {
+        debug {
+            // Debug builds are auto-signed with the SDK debug key.
+            // This APK is a TEST build, not a Play release.
+            applicationIdSuffix = ".debug"
+            versionNameSuffix = "-debug"
+        }
+        release {
+            // No release keystore exists for this first-project app.
+            // To ship a release APK later: create a keystore, add a
+            // signingConfigs block, and set signingConfig here.
+            // Until then, install the debug APK for testing.
+        }
+    }
+
+    compileOptions {
+        sourceCompatibility = JavaVersion.VERSION_17
+        targetCompatibility = JavaVersion.VERSION_17
+    }
+}

@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <style name="Theme.VocaLink" parent="android:Theme.Material.Light.NoActionBar">
+        <item name="android:colorPrimary">@color/vocalink_green</item>
+        <item name="android:colorPrimaryDark">@color/vocalink_green</item>
+        <item name="android:colorAccent">@color/vocalink_amber</item>
+        <item name="android:windowBackground">@color/vocalink_bg</item>
+    </style>
+</resources>
