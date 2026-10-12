@@ -76,3 +76,16 @@ div {
     width: 100%;
   }
 }
+
+/* Phones: stack side-by-side form fields vertically (provider/programme
+   forms, search filters). Desktop column is 480px so this only bites
+   on genuinely narrow screens. */
+@media (max-width: 480px) {
+  main form > div {
+    flex-direction: column !important;
+  }
+
+  main form > div > * {
+    width: 100%;
+  }
+}
