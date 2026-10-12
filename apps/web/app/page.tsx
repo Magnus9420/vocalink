@@ -55,7 +55,7 @@ export default async function Home({ searchParams }: { searchParams: Record<stri
             {["", "free", "sponsored", "paid"].map((c) => (<option key={c} value={c}>{c === "" ? "All" : c}</option>))}
           </select>
           <select name="format" defaultValue={searchParams.format ?? ""} style={{ flex: 1, padding: 10, borderRadius: 8, border: "1.5px solid #E4E7EC" }}>
-            {["", "online", "offline", "hybrid"].map((c) => (<option key={c} value={c}>{c === "" ? "Any format" : c}</option>))}
+            {["", "online", "offline", "hybrid"].map((c) => (<option key={c} value={c}>{c === "" ? "All" : c}</option>))}
           </select>
         </div>
         <label style={{ fontSize: 14 }}><input type="checkbox" name="verified" value="1" defaultChecked={filters.verifiedOnly} /> Verified only</label>
