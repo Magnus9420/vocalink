@@ -63,6 +63,7 @@ export default async function Home({ searchParams }: { searchParams: Record<stri
       </form>
       {guidedOn && <p><Link href="/guided">Not sure what to learn? Try Guided Discovery →</Link></p>}
       <p style={{ color: "#667085" }}>{rows.length} programme(s) found. Verified first.</p>
+      <div className="grid2">
       {rows.map((r) => (
         <div key={r.id} style={{ background: "#fff", border: "1px solid #E4E7EC", borderRadius: 12, padding: 14, marginTop: 12 }}>
           <div>
@@ -74,6 +75,7 @@ export default async function Home({ searchParams }: { searchParams: Record<stri
           {r.certificationInfo && <p style={{ fontSize: 13 }}>🎓 {r.certificationInfo}</p>}
         </div>
       ))}
+      </div>
       <footer style={{ marginTop: 24, paddingTop: 12, borderTop: "1px solid #E4E7EC", fontSize: 13, color: "#667085" }}>
         VocaLink: From Skill to Opportunity • <Link href="/providers/apply">List your training</Link> • Admin: localhost:3001/verifications
       </footer>

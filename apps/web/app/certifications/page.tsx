@@ -15,6 +15,7 @@ export default async function Certifications() {
       </nav>
       <h1 style={{ fontSize: 24 }}>Skills Certification</h1>
       <p style={{ color: "#667085" }}>Training completion ≠ certification. Track: Interested → In Progress → Assessed → Certified.</p>
+      <div className="grid2">
       {pathways.map((p) => (
         <div key={p.id} style={{ background: "#fff", border: "1px solid #E4E7EC", borderRadius: 12, padding: 14, marginTop: 12 }}>
           <div>
@@ -25,6 +26,7 @@ export default async function Certifications() {
           <p style={{ color: "#667085", fontSize: 13 }}>{p.body} • Assessment: {p.assessmentLocation}</p>
         </div>
       ))}
+      </div>
     </main>
   );
 }

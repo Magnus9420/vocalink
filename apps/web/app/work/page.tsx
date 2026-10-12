@@ -34,6 +34,7 @@ export default async function Work({ searchParams }: { searchParams: Record<stri
         <button type="submit" style={{ padding: 14, borderRadius: 12, border: 0, background: "#0E7C3E", color: "#fff", fontWeight: 800 }}>Search</button>
       </form>
       <p style={{ color: "#667085" }}>{rows.length} open. Apply with your Skills Passport.</p>
+      <div className="grid2">
       {rows.map((o) => (
         <div key={o.id} style={{ background: "#fff", border: "1px solid #E4E7EC", borderRadius: 12, padding: 14, marginTop: 12 }}>
           <span style={{ background: "#EAECF0", fontSize: 12, fontWeight: 800, padding: "4px 10px", borderRadius: 999 }}>{o.type}</span>{" "}
@@ -42,6 +43,7 @@ export default async function Work({ searchParams }: { searchParams: Record<stri
           <p style={{ color: "#667085", fontSize: 13 }}>{o.trade} • {o.state} {o.city ? `• ${o.city}` : ""}</p>
         </div>
       ))}
+      </div>
     </main>
   );
 }

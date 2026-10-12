@@ -89,3 +89,37 @@ div {
     width: 100%;
   }
 }
+
+/* Canvas: phone column by default, wide desktop canvas above 820px.
+   The Android APK WebView is phone-width, so it always gets column mode. */
+.shell {
+  max-width: 480px;
+  margin: 0 auto;
+  padding: 16px;
+}
+
+.grid2 {
+  display: grid;
+  gap: 0 12px;
+}
+
+@media (min-width: 820px) {
+  .shell {
+    max-width: 1024px;
+    padding: 24px 32px;
+  }
+
+  .grid2 {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (min-width: 1200px) {
+  .shell {
+    max-width: 1160px;
+  }
+
+  .grid2 {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
