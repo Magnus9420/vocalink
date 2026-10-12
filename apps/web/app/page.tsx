@@ -52,7 +52,7 @@ export default async function Home({ searchParams }: { searchParams: Record<stri
         </div>
         <div style={{ display: "flex", gap: 8, flexWrap: "wrap" }}>
           <select name="cost" defaultValue={searchParams.cost ?? ""} style={{ flex: 1, padding: 10, borderRadius: 8, border: "1.5px solid #E4E7EC" }}>
-            {["", "free", "sponsored", "paid"].map((c) => (<option key={c} value={c}>{c === "" ? "Any cost" : c}</option>))}
+            {["", "free", "sponsored", "paid"].map((c) => (<option key={c} value={c}>{c === "" ? "All" : c}</option>))}
           </select>
           <select name="format" defaultValue={searchParams.format ?? ""} style={{ flex: 1, padding: 10, borderRadius: 8, border: "1.5px solid #E4E7EC" }}>
             {["", "online", "offline", "hybrid"].map((c) => (<option key={c} value={c}>{c === "" ? "Any format" : c}</option>))}
