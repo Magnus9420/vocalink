@@ -1,0 +1,78 @@
+/* VocaLink mobile-first base styles (Phase: mobile-friendly rework).
+   Phone-first: single column, 16px inputs (no auto-zoom), 44px+ targets,
+   sticky scrollable nav, fluid type. Desktop: content stays in 480px column. */
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  -webkit-text-size-adjust: 100%;
+}
+
+body {
+  margin: 0;
+  overscroll-behavior-y: none;
+}
+
+img,
+video {
+  max-width: 100%;
+  height: auto;
+}
+
+a {
+  overflow-wrap: anywhere;
+}
+
+/* Top nav on every page: one scrollable row, sticky, tappable links. */
+main > nav {
+  position: sticky;
+  top: 0;
+  z-index: 10;
+  background: #f8faf7;
+  padding: 10px 0 !important;
+  overflow-x: auto;
+  white-space: nowrap;
+  scrollbar-width: none;
+  gap: 16px !important;
+}
+
+main > nav::-webkit-scrollbar {
+  display: none;
+}
+
+main > nav a,
+main > nav b {
+  padding: 10px 2px;
+  font-size: 15px;
+}
+
+/* Touch targets + no-zoom inputs. */
+button,
+input[type="submit"] {
+  min-height: 44px;
+}
+
+input,
+select,
+textarea {
+  font-size: 16px;
+  max-width: 100%;
+}
+
+/* Cards and forms never overflow narrow screens. */
+div {
+  overflow-wrap: break-word;
+}
+
+/* Small phones: slightly tighter type, full-width action buttons. */
+@media (max-width: 360px) {
+  h1 {
+    font-size: 21px !important;
+  }
+
+  form button[type="submit"] {
+    width: 100%;
+  }
+}
