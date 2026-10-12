@@ -29,7 +29,7 @@ export default async function Notifications() {
       ))}
       {rows.length === 0 && <p style={{ color: "#667085" }}>No notifications yet — enrol, apply, or message to generate some.</p>}
       <form action={save} style={{ marginTop: 16 }}>
-        <h3>Preferences (PRD §23)</h3>
+        <h3>Preferences</h3>
         {CATS.map((c) => (<label key={c} style={{ display: "block", fontSize: 14 }}><input type="checkbox" name={c} value="1" defaultChecked={prefs.includes(c)} /> {c}</label>))}
         <button type="submit" style={{ marginTop: 8, padding: "10px 14px", borderRadius: 8, border: 0, background: "#0E7C3E", color: "#fff", fontWeight: 800 }}>Save preferences</button>
       </form>

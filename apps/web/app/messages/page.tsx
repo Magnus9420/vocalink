@@ -16,7 +16,7 @@ export default async function Messages() {
   return (
     <main>
       <h1 style={{ fontSize: 24 }}>Messages (in-app)</h1>
-      <p style={{ color: "#667085" }}>Kept inside VocaLink for trust — no WhatsApp redirect (PRD §26).</p>
+      <p style={{ color: "#667085" }}>Kept inside VocaLink for trust — no WhatsApp redirect.</p>
       {convs.map((c) => (<p key={c.id}><Link href={`/messages/${c.id}`}>{c.subject}</Link></p>))}
       {convs.length === 0 && <p style={{ color: "#667085" }}>No conversations yet.</p>}
       <form action={start} style={{ display: "grid", gap: 8, marginTop: 12 }}>
