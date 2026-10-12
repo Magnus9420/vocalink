@@ -35,8 +35,11 @@ export default async function Home({ searchParams }: { searchParams: Record<stri
         <Link href="/notifications">Notifications</Link>
         <Link href="/messages">Messages</Link>
       </nav>
-      <p style={{ color: "#667085", fontSize: 14 }}>VocaLink • From Skill to Opportunity</p>
-      <h1 style={{ fontSize: 24 }}>Find a skill, get certified, find work</h1>
+      <div style={{ background: "linear-gradient(135deg, #0E7C3E 0%, #0A5E30 100%)", borderRadius: 16, padding: "20px 16px", color: "#fff", marginBottom: 12 }}>
+        <div style={{ display: "inline-block", fontSize: 12, fontWeight: 800, background: "rgba(255,255,255,0.18)", padding: "4px 10px", borderRadius: 999, letterSpacing: 0.4 }}>NIGERIA • VERIFIED TRAINING</div>
+        <div style={{ fontSize: 22, fontWeight: 800, marginTop: 8 }}>VocaLink</div>
+        <div style={{ fontSize: 14, opacity: 0.92 }}>From Skill to Opportunity — find a skill, get certified, find work.</div>
+      </div>
       <form method="get" style={{ display: "grid", gap: 8 }}>
         <input name="q" defaultValue={filters.q ?? ""} placeholder="Search trade, skill, provider…" style={{ width: "100%", padding: 13, borderRadius: 8, border: "1.5px solid #E4E7EC" }} />
         <div style={{ display: "flex", gap: 8, flexWrap: "wrap" }}>
