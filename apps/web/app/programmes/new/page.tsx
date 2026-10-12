@@ -28,7 +28,7 @@ export default async function PublishProgramme() {
   return (
     <main>
       <h1 style={{ fontSize: 24 }}>Publish Training Programme</h1>
-      <p style={{ color: "#667085" }}>Full §8 listing: learners must understand it without contacting you first. Keep certification honest.</p>
+      <p style={{ color: "#667085" }}>Full listing: learners must understand it without contacting you first. Keep certification honest.</p>
       <form action={action} style={{ display: "grid", gap: 10 }}>
         <select name="providerId" required style={{ padding: 12, borderRadius: 8, border: "1.5px solid #E4E7EC" }}>
           <option value="">Select provider…</option>
