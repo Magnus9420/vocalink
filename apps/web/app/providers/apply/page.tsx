@@ -25,7 +25,7 @@ export default function ProviderApply() {
       <form action={action} style={{ display: "grid", gap: 10 }}>
         <input name="name" required placeholder="Provider name" style={{ padding: 12, borderRadius: 8, border: "1.5px solid #E4E7EC" }} />
         <select name="type" style={{ padding: 12, borderRadius: 8, border: "1.5px solid #E4E7EC" }}>
-          <option>Vocational centre</option><option>Technical college</option><option>Certified trainer</option><option>Master artisan</option><option>Private training org</option>
+          <option>Vocational centre</option><option>Technical college</option><option>Certified trainer</option><option>Master artisan</option><option>Private training organization</option>
         </select>
         <textarea name="bio" required placeholder="What do you train?" rows={3} style={{ padding: 12, borderRadius: 8, border: "1.5px solid #E4E7EC" }} />
         <div style={{ display: "flex", gap: 8 }}>

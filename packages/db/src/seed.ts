@@ -65,7 +65,7 @@ async function main() {
     .values({
       id: "provider-stitchlab",
       name: "StitchLab Fashion Studio",
-      type: "Private training org",
+      type: "Private training organization",
       bio: "Fashion design for beginners in Abuja.",
       state: "FCT",
       city: "Abuja",
