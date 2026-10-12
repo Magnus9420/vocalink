@@ -28,7 +28,7 @@ export default async function Work({ searchParams }: { searchParams: Record<stri
             {["", "Lagos", "FCT"].map((s) => (<option key={s} value={s}>{s === "" ? "All locations" : s}</option>))}
           </select>
           <select name="paid" defaultValue={filters.paid ?? ""} style={{ flex: 1, padding: 10, borderRadius: 8, border: "1.5px solid #E4E7EC" }}>
-            {["", "paid", "unpaid", "stipend"].map((s) => (<option key={s} value={s}>{s === "" ? "Any pay" : s}</option>))}
+            {["", "paid", "unpaid", "stipend"].map((s) => (<option key={s} value={s}>{s === "" ? "All" : s}</option>))}
           </select>
         </div>
         <button type="submit" style={{ padding: 14, borderRadius: 12, border: 0, background: "#0E7C3E", color: "#fff", fontWeight: 800 }}>Search</button>
